@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Health Advisory</h1>
+<p class="lead">What each AQI category means, and what residents should do.
+A day counts as an advisory day when AQI is over 200 (Poor or worse).</p>
+
+<h2>Current situation</h2>
+<table class="table table-striped">
+  <thead>
+    <tr><th>Station</th><th>Latest AQI</th><th>Category</th><th>Date</th></tr>
+  </thead>
+  <tbody>
+    {% for s in stations %}
+    <tr>
+      <td>{{ s.station }}</td>
+      <td>{{ s.latest_aqi }}</td>
+      <td>{{ s.latest_category }}</td>
+      <td>{{ s.latest_date }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h2>Advice by category</h2>
+<table class="table table-bordered">
+  <thead>
+    <tr><th>Category</th><th>Health impact</th><th>What to do</th></tr>
+  </thead>
+  <tbody>
+    {% for category, (impact, action) in advice.items() %}
+    <tr>
+      <td><strong>{{ category }}</strong></td>
+      <td>{{ impact }}</td>
+      <td>{{ action }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p class="text-muted">Advice follows the CPCB health statements for each
+AQI category. This is general guidance, not medical advice.</p>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Stations</h1>
+<p class="lead">All three Delhi areas in this dataset, worst first.</p>
+<table class="table table-striped">
+  <thead>
+    <tr><th>Station</th><th>Average AQI</th><th>Worst day (AQI)</th>
+        <th>Latest AQI</th><th>Advisory days</th></tr>
+  </thead>
+  <tbody>
+    {% for s in stations %}
+    <tr>
+      <td>{{ s.station }}</td>
+      <td>{{ s.avg_aqi }}</td>
+      <td>{{ s.max_aqi }}</td>
+      <td>{{ s.latest_aqi }} — {{ s.latest_category }}</td>
+      <td>{{ s.advisory_days }} / {{ s.total_days }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p>RK Puram (south Delhi) is the worst on average; Anand Vihar (east
+Delhi) is the least bad. The gap is about 45 AQI points — enough to
+change the advisory decision on borderline days.</p>
+{% endblock %}

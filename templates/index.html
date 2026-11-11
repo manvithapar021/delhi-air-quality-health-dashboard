@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Delhi Air Quality &amp; Health Dashboard</h1>
+<p class="lead">Should Delhi issue a health advisory today? This dashboard
+answers that from daily AQI by area, pollutant and season.</p>
+
+<div class="alert alert-warning">
+  <strong>Worst area on average: {{ worst.station }}</strong> —
+  average AQI {{ worst.avg_aqi }} over {{ worst.total_days }} days,
+  with {{ worst.advisory_days }} health-advisory days (AQI over 200).
+  Latest data: {{ latest_date }}.
+</div>
+
+<div class="row">
+  <div class="col-md-7">
+    <h2>Monthly trend</h2>
+    <img src="{{ url_for('static', filename='images/monthly_trend.png') }}"
+         class="img-fluid" alt="Average AQI by month">
+  </div>
+  <div class="col-md-5">
+    <h2>Station comparison</h2>
+    <img src="{{ url_for('static', filename='images/station_comparison.png') }}"
+         class="img-fluid" alt="Average AQI by station">
+  </div>
+</div>
+
+<h2 class="mt-4">Stations</h2>
+<table class="table table-striped">
+  <thead>
+    <tr><th>Station</th><th>Average AQI</th><th>Latest AQI</th>
+        <th>Latest category</th><th>Advisory days</th></tr>
+  </thead>
+  <tbody>
+    {% for s in stations %}
+    <tr>
+      <td>{{ s.station }}</td>
+      <td>{{ s.avg_aqi }}</td>
+      <td>{{ s.latest_aqi }} ({{ s.latest_date }})</td>
+      <td>{{ s.latest_category }}</td>
+      <td>{{ s.advisory_days }} / {{ s.total_days }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p><a class="btn btn-primary" href="/advisory">What should residents do?</a></p>
+{% endblock %}

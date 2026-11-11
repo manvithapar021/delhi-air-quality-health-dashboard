@@ -1,0 +1,15 @@
+/* Delhi AQI Dashboard — small custom styles on top of Bootstrap. */
+body {
+  background-color: #f8f9fa;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+img {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+}
